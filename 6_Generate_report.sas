@@ -24,7 +24,7 @@ C. Stats about final sample:
 %macro generate_reports;
 options locale=en_US;
 ods noproctitle;
-/* Add a large global title */
+/* Add global title */
 ods escapechar='^';
 ods text="^S={font_size=11pt font_weight=bold just=center} Statistics for Input Dataset, Clusters and Final Sample^n^n";
 

@@ -1,6 +1,5 @@
 /* The purpose of this macro is to prepare data for creation of card level dataset. */
 
-
 %macro clean_data;
     %LET source_dataset = frauds.demodata;
     
@@ -23,13 +22,7 @@
         where AMOUNT_BASE ^= . and RUN_TIMESTAMP ^= ' ' and LOCAL_TIMESTAMP ^= ' ';
     run;
 
-    /* 4. Remove transactions with missing time and amount */
-    data inter.cleaned_data;
-        set inter.cleaned_data;
-        where AMOUNT_BASE ^= . and RUN_TIMESTAMP ^= ' ' and LOCAL_TIMESTAMP ^= ' ';
-    run;
-
-    /* 6. Convert 'Y'/'N' to 1/0 for relevant variables */
+    /* 4. Convert 'Y'/'N' to 1/0 for relevant variables */
 data inter.cleaned_data;
         set inter.cleaned_data;
         POS_TERMINAL_ATTENDED_NUM = (POS_TERMINAL_ATTENDED = 'Y');
@@ -73,8 +66,3 @@ data inter.cleaned_data;
         if &var = '' then &var = symget('most_freq');
     run;
 %mend impute_most_freq;
-
-
-/* proc freq data=inter.cleaned_data; */
-/* tables POS_TERMINAL_ATTENDED CUSTOMER_PRESENT_INDICATOR CURRENCY_CODE_FOREIGN / missing; */
-/* run; */
